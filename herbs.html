@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Herbs | TradeShip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">Sgo.TSI</h1>
+</header>
+
+<section class="products">
+    <h2>Herbs Showcase</h2>
+    <p>Available High Quality Herbs</p>
+
+    <div class="product-grid">
+
+        <div class="product-card"
+             onclick="goToProduct('Turmeric', 130, 'herbs')">
+            <img src="https://i.herbalreality.com/wp-content/uploads/2023/11/22183558/Fresh-turmeric-root-Curcuma-longa-scaled-1300x867.jpg">
+            <h3>Turmeric</h3>
+            <p>Earthy and slightly bitter flavor</p>
+        </div>
+
+        <div class="product-card"
+             onclick="goToProduct('Cumin', 200, 'herbs')">
+            <img src="https://thumbs.dreamstime.com/z/cumin-seed-cumin-plants-hands-zira-cumin-plant-cumin-seeds-cumin-plants-man-hands-cumin-seed-cumin-plants-177498772.jpg">
+            <h3>Cumin</h3>
+            <p>Warm, nutty spice</p>
+        </div>
+
+        <div class="product-card"
+             onclick="goToProduct('Peppermint', 250, 'herbs')">
+            <img src="https://trueloveseeds.com/cdn/shop/products/Peppermint2_1024x1024@2x.jpg?v=1678911718">
+            <h3>Peppermint</h3>
+            <p>Fresh minty herb</p>
+        </div>
+
+    </div>
+
+    <br>
+    <a href="index.html" class="primary-btn">⬅ Back to Home</a>
+</section>
+
+<script>
+function goToProduct(name, price, section) {
+    window.location.href =
+        `product.html?name=${encodeURIComponent(name)}&price=${price}&section=${section}`;
+}
+</script>
+
+</body>
+</html>

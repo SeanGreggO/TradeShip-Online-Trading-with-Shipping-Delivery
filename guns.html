@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guns | TradeShip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">Sgo.TSI</h1>
+</header>
+
+<section class="products">
+    <h2>Guns Showcase</h2>
+    <p>Available firearm equipment</p>
+
+    <div class="product-grid">
+
+        <div class="product-card"
+             onclick="goToProduct('Pistol', 500, 'guns')">
+            <img src="https://i.ytimg.com/vi/fVGa2wfiiGE/sddefault.jpg">
+            <h3>Pistol</h3>
+            <p>D-E Blue Crystal</p>
+        </div>
+
+        <div class="product-card"
+             onclick="goToProduct('Rifle', 900, 'guns')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUWG6YNSBlQt2dktktG2lvGR1IzjoGPv7noA&s">
+            <h3>Rifle</h3>
+            <p>M4A1 - S</p>
+        </div>
+
+        <div class="product-card"
+             onclick="goToProduct('Sniper', 1300, 'guns')">
+            <img src="https://gamebanana.com/mods/embeddables/222948?variant=sd_image">
+            <h3>Sniper</h3>
+            <p>AWM Jade</p>
+        </div>
+
+    </div>
+
+    <br>
+    <a href="index.html" class="primary-btn">⬅ Back to Home</a>
+</section>
+
+<script>
+function goToProduct(name, price, section) {
+    window.location.href =
+        `product.html?name=${encodeURIComponent(name)}&price=${price}&section=${section}`;
+}
+</script>
+
+</body>
+</html>

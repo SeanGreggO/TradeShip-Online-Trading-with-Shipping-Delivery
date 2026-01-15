@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="products">
+    <div class="product-detail">
+        <h2 id="productName"></h2>
+        <p id="productPrice"></p>
+
+        <button class="primary-btn" onclick="addToCart()">Add to Cart</button>
+        <button class="primary-btn" onclick="buyNow()">Buy Now</button>
+
+        <div class="back-links">
+            <a id="backLink">⬅ Back</a>
+        </div>
+    </div>
+</section>
+
+<!-- BUY NOW MODAL -->
+<div id="buyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBuyModal()">&times;</span>
+        <h2>Purchase Product</h2>
+        <p id="modalProductName"></p>
+        <p id="modalProductPrice"></p>
+
+        <h3>Delivery Information</h3>
+        <input type="text" id="buyerName" placeholder="Full Name"><br><br>
+        <input type="text" id="buyerAddress" placeholder="Complete Address"><br><br>
+        <input type="text" id="buyerContact" placeholder="Contact Number"><br><br>
+
+        <h3>Claiming Method</h3>
+        <select id="claimMethod">
+            <option>Delivery</option>
+            <option>Pickup</option>
+        </select>
+
+        <br><br>
+        <button class="primary-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+const price = params.get("price");
+const section = params.get("section");
+
+document.getElementById("productName").innerText = name;
+document.getElementById("productPrice").innerText = "Price: ₱" + price;
+
+if (section) {
+    document.getElementById("backLink").href = section + ".html";
+}
+
+// ADD TO CART
+function getCart() {
+    const user = localStorage.getItem("currentUser");
+    if (!user) return [];
+    const carts = JSON.parse(localStorage.getItem("userCarts")) || {};
+    return carts[user] || [];
+}
+
+function saveCart(cart) {
+    const user = localStorage.getItem("currentUser");
+    if (!user) return;
+    const carts = JSON.parse(localStorage.getItem("userCarts")) || {};
+    carts[user] = cart;
+    localStorage.setItem("userCarts", JSON.stringify(carts));
+}
+function addToCart() {
+    const user = localStorage.getItem("currentUser");
+    if (!user) {
+        alert("Please log in first.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const cart = getCart();
+    cart.push({ name, price });
+    saveCart(cart);
+
+    alert(name + " added to cart!");
+}
+
+
+
+
+function saveCart(cart) {
+    const user = localStorage.getItem("currentUser");
+    if (!user) return;
+    const carts = JSON.parse(localStorage.getItem("userCarts")) || {};
+    carts[user] = cart;
+    localStorage.setItem("userCarts", JSON.stringify(carts));
+}
+
+
+// BUY NOW
+function buyNow() {
+    const user = localStorage.getItem("currentUser");
+    if (!user) {
+        alert("Please log in first.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    document.getElementById("buyModal").style.display = "block";
+    document.getElementById("modalProductName").innerText = name;
+    document.getElementById("modalProductPrice").innerText = "Price: ₱" + price;
+}
+
+function closeBuyModal() {
+    document.getElementById("buyModal").style.display = "none";
+}
+
+function confirmPurchase() {
+    const buyerName = document.getElementById("buyerName").value;
+    const buyerAddress = document.getElementById("buyerAddress").value;
+    const buyerContact = document.getElementById("buyerContact").value;
+
+    if (!buyerName || !buyerAddress || !buyerContact) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    alert(`Thank you ${buyerName}! Your order has been placed.`);
+    closeBuyModal();
+    window.location.href = "index.html";
+}
+
+// Close modal if clicked outside
+window.onclick = function(e) {
+    const modal = document.getElementById("buyModal");
+    if (e.target === modal) closeBuyModal();
+};
+</script>
+
+</body>
+</html>

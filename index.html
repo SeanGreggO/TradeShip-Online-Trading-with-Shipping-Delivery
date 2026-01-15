@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Market | TradeShip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="logo">Sg0.ONDespensary</h1>
+
+        <div class="nav-user">
+    <span id="welcomeUser" style="color:white; margin-right:10px;"></span>
+
+    <a href="login.html" id="loginLink">Login</a>
+
+    <a href="cart.html" class="cart-icon" id="cartIcon" style="display:none;">
+        🛒 <span id="cartCount">0</span>
+    </a>
+
+    <button onclick="logout()" id="logoutBtn"
+        style="display:none; margin-left:10px;"
+        class="primary-btn">
+        Logout
+    </button>
+</div>
+
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+    <article class="hero-content">
+        <img src="https://clan.akamai.steamstatic.com/images/3703047/c1bc2216355cc4e326102d2af2c570ca5185dfb4.png" class="hero-img">
+        <h2>Choose Your Product Smarter. Ship It Faster</h2>
+        <h3>Secure online trading with delivery</h3>
+    </article>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+        <article class="feature-card">
+            <img src="https://upload.bitpapa.com/uploads/blog_item/thumbnail/301/049_Best_Practices_for_Secure_Trading.JPG">
+            <h3>Secure Trading</h3>
+            <p>Protected transactions</p>
+        </article>
+
+        <article class="feature-card">
+            <img src="https://www.shutterstock.com/image-photo/elevated-front-view-loaded-container-260nw-2678237157.jpg">
+            <h3>Fast Shipping</h3>
+            <p>Reliable delivery services</p>
+        </article>
+
+        <article class="feature-card">
+            <img src="https://www.rastrac.com/hubfs/images/Fotolia_49279777_Education.jpg">
+            <h3>Order Tracking</h3>
+            <p>Real-time updates</p>
+        </article>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+    <h2>Product Showcase</h2>
+
+    <div class="product-grid">
+        <a href="guns.html" class="product-link">
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ73jdV9qqJotbBB6Nt2_QRj0Clbtv4V9r46Q&s">
+                <h3>GUNS</h3>
+            </div>
+        </a>
+
+        <a href="drugs.html" class="product-link">
+            <div class="product-card">
+                <img src="https://c.ndtvimg.com/2024-09/04i1l6l_medicine_640x480_26_September_24.jpg">
+                <h3>DRUGS</h3>
+            </div>
+        </a>
+
+        <a href="herbs.html" class="product-link">
+            <div class="product-card">
+                <img src="https://curiosityuntamed.com/wp-content/uploads/2021/03/herb-1-1024x577.jpg">
+                <h3>HERBS</h3>
+            </div>
+        </a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <h2>Contact Us</h2>
+    <p>Email: support@tradeship.com</p>
+    <p>Phone: +63 912 345 6789</p>
+    <h5>© 2026 TradeShip</h5>
+</footer>
+
+<script>
+    
+function updateNavbar() {
+    const user = localStorage.getItem("currentUser");
+
+    const cartIcon = document.getElementById("cartIcon");
+    const loginLink = document.getElementById("loginLink");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const welcomeUser = document.getElementById("welcomeUser");
+
+    if (user) {
+        cartIcon.style.display = "inline";
+        logoutBtn.style.display = "inline";
+        loginLink.style.display = "none";
+        welcomeUser.innerText = `Welcome, ${user}`;
+        updateCartCount();
+    } else {
+        cartIcon.style.display = "none";
+        logoutBtn.style.display = "none";
+        loginLink.style.display = "inline";
+        welcomeUser.innerText = "";
+    }
+}
+
+function updateCartCount() {
+    const cart = getCart();
+    document.getElementById("cartCount").innerText = cart.length;
+}
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "index.html";
+}
+
+
+updateNavbar();
+</script>
+
+</body>
+</html>

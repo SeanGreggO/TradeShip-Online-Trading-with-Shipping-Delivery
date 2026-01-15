@@ -1,0 +1,56 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login | TradeShip</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+    <section class="products">
+        <div class="product-detail">
+            <h2>Login</h2>
+
+            <input type="text" id="loginUsername" placeholder="Username">
+            <br><br>
+            <input type="password" id="loginPassword" placeholder="Password">
+            <br><br>
+
+            <button class="primary-btn" onclick="login()">Login</button>
+
+            <p>
+                Don’t have an account?
+                <a href="register.html">Register</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+    function login() {
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+
+        if (!username || !password) {
+            alert("Please enter username and password.");
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        const foundUser = users.find(
+            u => u.username === username && u.password === password
+        );
+
+        if (!foundUser) {
+            alert("Invalid username or password.");
+            return;
+        }
+
+        localStorage.setItem("currentUser", username);
+        alert("Login successful!");
+        window.location.href = "index.html";
+    }
+    </script>
+
+    </body>
+    </html>

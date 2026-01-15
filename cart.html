@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart | TradeShip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="products">
+    <div class="product-detail">
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <h3 id="totalPrice"></h3>
+        <button class="primary-btn" onclick="checkout()">Checkout</button>
+        <a href="index.html" class="primary-btn">⬅ Continue Shopping</a>
+    </div>
+</section>
+
+<script>
+const currentUser = localStorage.getItem("currentUser");
+if (!currentUser) {
+    alert("Please login first.");
+    window.location.href = "login.html";
+}
+
+function getCart() {
+    const user = localStorage.getItem("currentUser");
+    if (!user) return [];
+    const carts = JSON.parse(localStorage.getItem("userCarts")) || {};
+    return carts[user] || [];
+}
+
+function saveCart(cart) {
+    const user = localStorage.getItem("currentUser");
+    if (!user) return;
+    const carts = JSON.parse(localStorage.getItem("userCarts")) || {};
+    carts[user] = cart;
+    localStorage.setItem("userCarts", JSON.stringify(carts));
+}
+
+
+function showCart() {
+    const cart = getCart();
+    const cartDiv = document.getElementById("cartItems");
+    cartDiv.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+        document.getElementById("totalPrice").innerText = "";
+        return;
+    }
+
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += Number(item.price);
+        const itemDiv = document.createElement("p");
+        itemDiv.innerHTML = `
+            ${item.name} - ₱${item.price} 
+            <button onclick="removeItem(${index})">Remove</button>
+        `;
+        cartDiv.appendChild(itemDiv);
+    });
+
+    document.getElementById("totalPrice").innerText = "Total: ₱" + total;
+}
+
+function removeItem(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    showCart();
+}
+
+function checkout() {
+    const cart = getCart();
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    window.location.href = "checkout.html";
+}
+
+showCart();
+</script>
+
+</body>
+</html>

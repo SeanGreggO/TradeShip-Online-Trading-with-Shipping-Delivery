@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drugs | TradeShip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">Sgo.TSI</h1>
+</header>
+
+<section class="products">
+    <h2>Drugs Showcase</h2>
+    <p>Available High Quality Drugs</p>
+
+    <div class="product-grid">
+
+        <div class="product-card"
+             onclick="goToProduct('Biogesic', 90, 'drugs')">
+            <img src="https://pbs.twimg.com/media/FIQeMQuVkAIIEYF.jpg">
+            <h3>Biogesic</h3>
+            <p>Acetaminophen</p>
+        </div>
+
+        <div class="product-card"
+             onclick="goToProduct('Cetirizine', 30, 'drugs')">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/10/356986894/AC/GG/OW/73085724/sitragen.webp">
+            <h3>Cetirizine</h3>
+            <p>Allergy medication</p>
+        </div>
+
+    </div>
+
+    <br>
+    <a href="index.html" class="primary-btn">⬅ Back to Home</a>
+</section>
+
+<script>
+function goToProduct(name, price, section) {
+    window.location.href =
+        `product.html?name=${encodeURIComponent(name)}&price=${price}&section=${section}`;
+}
+</script>
+
+</body>
+</html>
